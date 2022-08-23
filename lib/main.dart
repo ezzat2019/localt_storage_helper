@@ -8,13 +8,19 @@ import 'package:test_test_dart/hive/hive_helper.dart';
 import 'package:test_test_dart/local_screen.dart';
 import 'package:test_test_dart/notification/notification_helper.dart';
 import 'package:test_test_dart/notification/notification_screen.dart';
-
+import 'package:device_preview/device_preview.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
  await DBHelper().init();
  await NotificationHelper().init();
  await hiveHelper.init();
-  runApp(const MyApp());
+  runApp( DevicePreview(
+    enabled: true,
+    tools: [
+      ...DevicePreview.defaultTools,
+    ],
+    builder: (BuildContext context) { return  MyApp(); },
+  ));
 }
 
 class MyApp extends StatelessWidget {
